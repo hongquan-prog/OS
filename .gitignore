@@ -1,0 +1,7 @@
+build
+.vscode
+*.bin
+*.o
+*.elf
+*.hex
+*.img

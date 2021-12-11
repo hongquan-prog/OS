@@ -1,0 +1,25 @@
+###############################################
+# Configuration file for Bochs
+###############################################
+
+# Bochs在运行过程中能够使用的内存, 单位为MBs
+megs: 32
+
+# 设置BIOS和VGA BIOS
+romimage: file=/usr/local/share/bochs/BIOS-bochs-latest
+vgaromimage: file=/usr/share/vgabios/vgabios.bin
+
+# 定义启动盘a大小，文件路径，磁盘状态
+floppya: 1_44=boot.img, status=inserted
+
+# 选择启动盘
+boot: floppy
+
+# 设置日志文件的输出
+# log: bochsout.text
+
+# 关闭鼠标
+mouse: enabled=0
+
+# 并打开键盘,选择键盘布局
+keyboard: keymap=/usr/local/share/bochs/keymaps/x11-pc-us.map
