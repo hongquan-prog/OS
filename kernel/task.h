@@ -3,7 +3,8 @@
 #include "kernel.h"
 #include "queue.h"
 
-typedef struct {
+typedef struct
+{
     uint32 gs;
     uint32 fs;
     uint32 es;
@@ -26,42 +27,42 @@ typedef struct {
 
 typedef struct
 {
-    uint32   previous;
-    uint32   esp0;
-    uint32   ss0;
-    uint32   unused[22];
-    uint16   reserved;
-    uint16   iomb;
+    uint32 previous;
+    uint32 esp0;
+    uint32 ss0;
+    uint32 unused[22];
+    uint16 reserved;
+    uint16 iomb;
 } TSS;
 
 typedef struct
 {
-    RegValue   rv;
+    RegValue rv;
     Descriptor ldt[3];
-    uint16     ldtSelector;
-    uint16     tssSelector;
-    void       (*tmain)();
-    uint32     id;
-    uint16     current;
-    uint16     total;
-    char       name[8]; 
-    byte*      stack;
+    uint16 ldtSelector;
+    uint16 tssSelector;
+    void (*tmain)();
+    uint32 id;
+    uint16 current;
+    uint16 total;
+    char name[8];
+    byte *stack;
 } Task;
 
 typedef struct
 {
     QueueNode head;
     Task task;
-}TaskNode;
+} TaskNode;
 
 typedef enum
 {
     WAIT,
     NOTIFY
-}MutexAction;
+} MutexAction;
 
-extern void (* const RunTask)(volatile Task* pt);
-extern void (* const LoadTask)(volatile Task* pt);
+extern void (*const RunTask)(volatile Task *pt);
+extern void (*const LoadTask)(volatile Task *pt);
 
 void TaskModuleInit();
 void LaunchTask();

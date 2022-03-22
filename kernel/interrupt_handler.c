@@ -3,7 +3,7 @@
 #include "task.h"
 #include "mutex.h"
 
-extern volatile Task* g_current_task;
+extern volatile Task *g_current_task;
 
 void TimerHandler()
 {
@@ -34,7 +34,6 @@ void PageFaultHandler()
     KillTask();
 }
 
-
 void SegmentFaultHandler()
 {
     SetPrintPos(GetCurrentRow() + 1, 0);
@@ -42,4 +41,3 @@ void SegmentFaultHandler()
     PrintString((const char *)g_current_task->name);
     KillTask();
 }
-

@@ -4,8 +4,7 @@
 
 typedef struct app
 {
-    const char* name;
+    const char *name;
     void (*tmain)();
     byte priority;
-}AppInfo;
-
+} AppInfo;

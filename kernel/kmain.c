@@ -8,7 +8,7 @@
 
 void kmain()
 {
-    void (*AppModuleInit)() = (void*)BaseAddressOfApp;
+    void (*AppModuleInit)() = (void *)BaseAddressOfApp;
     SetPrintPos(0, 38);
     PrintString("EOS");
 
@@ -21,8 +21,7 @@ void kmain()
     PrintString("\nIDT Size:");
     PrintIntDec(g_idt_info.size);
 
-    
-    MemModuleInit((byte*)KernelHeapBaseAddr, HeapSize);
+    MemModuleInit((byte *)KernelHeapBaseAddr, HeapSize);
     MutexModuleInit();
     AppModuleInit();
     TaskModuleInit();

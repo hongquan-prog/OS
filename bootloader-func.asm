@@ -4,7 +4,7 @@ nop
 
 define:
     exe_item_length equ 32
-    exe_item_enrty equ BaseAddressOfStack-exe_item_length
+    exe_item_enrty equ BaseAddressOfStack - exe_item_length
     InitSPValue equ exe_item_enrty
     RootEntryOffset equ 19
     RootEntryLength equ 14

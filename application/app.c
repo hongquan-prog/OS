@@ -2,6 +2,7 @@
 #include "memory.h"
 #include "utility.h"
 #include "syscall.h"
+#include "screen.h"
 
 #define MAX_APP_NUM 16
 
@@ -41,7 +42,7 @@ void TaskB()
     ExitCritical(s_mutex);
 }
 
-static RegisterApp(const char *name, void (*tmain)(), byte priority)
+static void RegisterApp(const char *name, void (*tmain)(), byte priority)
 {
     if (s_app_number < MAX_APP_NUM)
     {
@@ -53,7 +54,7 @@ static RegisterApp(const char *name, void (*tmain)(), byte priority)
     }
 }
 
-void AppMain()
+int AppMain()
 {
     RegisterApp("A", TaskA, 255);
     RegisterApp("B", TaskB, 255);

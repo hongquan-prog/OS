@@ -1,7 +1,7 @@
 #pragma once
 
-#define SCREEN_WIDTH    80
-#define SCREEN_HEIGHT   25
+#define SCREEN_WIDTH  80
+#define SCREEN_HEIGHT 25
 
 typedef enum
 {
@@ -14,11 +14,11 @@ typedef enum
 } PrintColor;
 
 void ClearScreen();
-bool  SetPrintPos(byte x, byte y);
+bool SetPrintPos(byte x, byte y);
 void SetPrintColor(PrintColor c);
-int PrintChar(char c);
-int PrintString(const char* s);
-int PrintIntDec(int32 n);
-int PrintIntHex(uint32 n);
+int32 PrintChar(char c);
+int32 PrintString(const char *s);
+int32 PrintIntDec(int32 n);
+int32 PrintIntHex(uint32 n);
 byte GetCurrentRow(void);
 byte GetCurrentClumn(void);
