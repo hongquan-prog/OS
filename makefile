@@ -1,6 +1,6 @@
 .PHONY:all clean rebuild install
 
-CC := gcc-4.7
+CC := gcc-9
 LD := ld
 RM := rm -fr
 NASM := nasm
@@ -99,19 +99,19 @@ $(KERNEL_ENTRY_OUT) : $(KERNEL_ENTRY_SRC) $(INCLUDE_SRC)
 	nasm -f elf $< -o $@
 
 $(KERNEL_BIN) : $(KERNEL_ELF) 
-	objcopy -j .text -S -O binary $< $@
+	objcopy -O binary $< $@
 
 $(KERNEL_ELF) : $(KERNEL_ENTRY_OUT) $(KERNEL_OBJS)
-	ld -m elf_i386 $^ -o $@ $(KERNEL_LDS)
+	$(LD) -m elf_i386 $^ -o $@ -T$(KERNEL_LDS)
 
 $(APP_ENTRY_OUT) : $(APP_ENTRY_SRC) $(INCLUDE_SRC)
 	nasm -f elf $< -o $@
 
 $(APP_BIN) : $(APP_ELF) 
-	objcopy -j .text -S -O binary $< $@
+	objcopy -O binary $< $@
 
 $(APP_ELF) : $(APP_ENTRY_OUT) $(APP_OBJS)
-	$(LD) -m elf_i386 $^ -o $@ $(APP_LDS)
+	$(LD) -m elf_i386 $^ -o $@ -T$(APP_LDS)
 
 $(DIR_OBJS)/%$(TYPE_OBJ) : %$(TYPE_SRC)
 	$(CC) $(CFLAGS) -m32 -fno-builtin -fno-stack-protector -c $(filter %$(TYPE_SRC), $^) -o $@

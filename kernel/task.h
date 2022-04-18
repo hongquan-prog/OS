@@ -61,8 +61,8 @@ typedef enum
     NOTIFY
 } MutexAction;
 
-extern void (*const RunTask)(volatile Task *pt);
-extern void (*const LoadTask)(volatile Task *pt);
+extern void (*RunTask)(volatile Task *pt);
+extern void (*LoadTask)(volatile Task *pt);
 
 void TaskModuleInit();
 void LaunchTask();

@@ -21,8 +21,8 @@ static Queue s_ready_task_queue = {0};
 static Queue s_free_task_queue = {0};
 static Queue s_wait_task_queue = {0};
 
-void (*const RunTask)(volatile Task *pt) = NULL;
-void (*const LoadTask)(volatile Task *pt) = NULL;
+void (*RunTask)(volatile Task *pt) = NULL;
+void (*LoadTask)(volatile Task *pt) = NULL;
 
 AppInfo *(*GetAppToRun)(uint32 index) = NULL;
 uint32 (*GetAppNum)() = NULL;

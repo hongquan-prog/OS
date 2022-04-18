@@ -1,5 +1,8 @@
 #pragma once
 
+#include "type.h"
+#include "const.h"
+
 #define SCREEN_WIDTH  80
 #define SCREEN_HEIGHT 25
 
