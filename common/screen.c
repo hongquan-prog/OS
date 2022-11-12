@@ -1,5 +1,4 @@
 
-#include "kernel.h"
 #include "screen.h"
 
 static int32 s_pos_row = 0;
