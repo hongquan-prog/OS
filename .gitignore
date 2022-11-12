@@ -5,3 +5,4 @@ build
 *.elf
 *.hex
 *.img
+bochsrc

@@ -19,32 +19,14 @@ add_executable(${LOADER_TARGET} loader.asm)
 set_target_properties(${LOADER_TARGET} PROPERTIES SUFFIX .bin)
 target_compile_options(${LOADER_TARGET} PRIVATE -I${COMMON_C_INCLUDE})
 
-# generate floppy image
-add_custom_command(
-    TARGET ${BOOT_TARGET}
-    PRE_BUILD 
-    COMMAND 
-    ${CMAKE_BXIMAGE}
-    -q 
-    -mode=create 
-    -fd=1.44M 
-    ${BOOT_IMAGE}
-    )
-
-# write boot into image
+# generate boot.bin and loader.bin
 add_custom_command(
     TARGET ${BOOT_TARGET}
     POST_BUILD 
     COMMAND 
-    ${CMAKE_DD}
-    if=${CMAKE_CURRENT_BINARY_DIR}/${BOOT_TARGET}.bin
-    of=${BOOT_IMAGE}
-    bs=512 
-    count=1 
-    conv=notrunc
+    cp ${CMAKE_CURRENT_BINARY_DIR}/${BOOT_TARGET}.bin ${BOOT_BIN}
     )
 
-# write boot into image
 add_custom_command(
     TARGET ${LOADER_TARGET}
     POST_BUILD 

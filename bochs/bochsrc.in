@@ -10,7 +10,7 @@ romimage: file=@CMAKE_BOCHS@/BIOS-bochs-latest
 vgaromimage: file=@CMAKE_VGABIOS@/vgabios.bin
 
 # 定义启动盘a大小，文件路径，磁盘状态
-floppya: 1_44=@BOOT_IMAGE@, status=inserted
+floppya: 1_44=@OS_IMAGE@, status=inserted
 
 # 选择启动盘
 boot: floppy
