@@ -4,6 +4,7 @@ project(OS)
 include(tools.cmake)
 
 set(BOOT_TARGET boot)
+set(MBR_TARGET mbr)
 set(LOADER_TARGET loader)
 set(KERNEL_TARGET kernel)
 set(APP_TARGET app)
@@ -35,7 +36,7 @@ add_custom_command(OUTPUT ${OS_IMAGE}
     )
 
 # write mbr into floppy
-add_custom_target(mbr ALL
+add_custom_target(${MBR_TARGET}
     DEPENDS ${BOOT_TARGET} ${OS_IMAGE}
     COMMAND 
     ${CMAKE_DD}
@@ -53,7 +54,7 @@ add_custom_command(OUTPUT ${MOUNT_DIR}
 
 # move kernel and app into floppy
 add_custom_target(copy ALL
-    DEPENDS ${OS_IMAGE} ${LOADER_TARGET} ${KERNEL_TARGET} ${APP_TARGET} ${MOUNT_DIR}
+    DEPENDS ${MBR_TARGET} ${LOADER_TARGET} ${KERNEL_TARGET} ${APP_TARGET} ${MOUNT_DIR}
     COMMAND
     sudo mount -o loop ${OS_IMAGE} ${MOUNT_DIR}
     COMMAND
