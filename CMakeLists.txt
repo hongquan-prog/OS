@@ -46,9 +46,14 @@ add_custom_target(mbr ALL
     conv=notrunc
     )
 
+# create mnt dir
+add_custom_command(OUTPUT ${MOUNT_DIR}
+    COMMAND mkdir -p ${MOUNT_DIR}
+    )
+
 # move kernel and app into floppy
 add_custom_target(copy ALL
-    DEPENDS ${OS_IMAGE} ${LOADER_TARGET} ${KERNEL_TARGET} ${APP_TARGET}
+    DEPENDS ${OS_IMAGE} ${LOADER_TARGET} ${KERNEL_TARGET} ${APP_TARGET} ${MOUNT_DIR}
     COMMAND
     sudo mount -o loop ${OS_IMAGE} ${MOUNT_DIR}
     COMMAND
