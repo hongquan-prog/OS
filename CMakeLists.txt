@@ -30,7 +30,7 @@ add_custom_command(OUTPUT ${OS_IMAGE}
     COMMAND 
     ${CMAKE_BXIMAGE}
     -q 
-    -mode=create 
+    ${BXIMAGE_PERFORM_OPTION}=create 
     -fd=1.44M 
     ${OS_IMAGE}
     )

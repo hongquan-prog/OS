@@ -33,16 +33,32 @@ endif()
 find_program(BXIMAGE_PATH bximage) 
 if (NOT BXIMAGE_PATH) 
     message(FATAL_ERROR "Cannot find bximage command: bximage") 
+else()
+    execute_process(COMMAND bximage 
+    --help
+    OUTPUT_VARIABLE BXIMAGE_OUTPUT
+    ERROR_VARIABLE BXIMAGE_OUTPUT)
+
+    string(FIND "${BXIMAGE_OUTPUT}" "-func=" BXIMAGE_OPTION_POS)
+
+    if (BXIMAGE_OPTION_POS STREQUAL "-1")
+        set(BXIMAGE_PERFORM_OPTION "-create")
+    else()
+        set(BXIMAGE_PERFORM_OPTION "-func")
+    endif()
+
+    unset(BXIMAGE_OPTION_POS)
+    unset(BXIMAGE_OUTPUT)
 endif() 
 
 # find bochs
-find_path(BOCHS_PATH name BIOS-bochs-latest PATHS /usr/share/bochs) 
+find_path(BOCHS_PATH name BIOS-bochs-latest PATHS /usr/share/bochs /usr/local/share/bochs) 
 if (NOT BOCHS_PATH) 
     message(FATAL_ERROR "Cannot find bochs virtual marchine")
 endif() 
 
 # find vgabios
-find_path(VGABIOS_PATH name vgabios.bin PATHS /usr/share/vgabios) 
+find_path(VGABIOS_PATH name vgabios.bin PATHS /usr/share/vgabios /usr/local/share/vgabios) 
 if (NOT VGABIOS_PATH) 
     message(FATAL_ERROR "Cannot find vgabios") 
 endif() 
@@ -55,9 +71,6 @@ set(CMAKE_DD ${DD_PATH} CACHE STRING "dd")
 set(CMAKE_BXIMAGE ${BXIMAGE_PATH} CACHE STRING "bximage")
 set(CMAKE_VGABIOS ${VGABIOS_PATH} CACHE STRING "vgabios")
 set(CMAKE_BOCHS ${BOCHS_PATH} CACHE STRING "bochs virtual marchine")
-
-message(${BOCHS_PATH})
-message(${CMAKE_VGABIOS})
 
 unset(NASM_COMPILER_PATH)
 unset(C_COMPILER_PATH)
