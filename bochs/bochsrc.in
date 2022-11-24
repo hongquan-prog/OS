@@ -7,7 +7,7 @@ megs: 32
 
 # 设置BIOS和VGA BIOS
 romimage: file=@CMAKE_BOCHS@/BIOS-bochs-latest
-vgaromimage: file=@CMAKE_VGABIOS@/vgabios.bin
+vgaromimage: file=@CMAKE_BOCHS@/VGABIOS-lgpl-latest
 
 # 定义启动盘a大小，文件路径，磁盘状态
 floppya: 1_44=@OS_IMAGE@, status=inserted
