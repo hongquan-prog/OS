@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(OS)
 include(tools.cmake)
+project(OS)
 
 set(BOOT_TARGET boot)
 set(MBR_TARGET mbr)
@@ -28,7 +28,7 @@ add_subdirectory(application)
 # generate floppy image
 add_custom_command(OUTPUT ${OS_IMAGE}
     COMMAND 
-    ${CMAKE_BXIMAGE}
+    ${BXIMAGE_TOOL}
     -q 
     ${BXIMAGE_PERFORM_OPTION}=create 
     -fd=1.44M 
@@ -39,7 +39,7 @@ add_custom_command(OUTPUT ${OS_IMAGE}
 add_custom_target(${MBR_TARGET}
     DEPENDS ${BOOT_TARGET} ${OS_IMAGE}
     COMMAND 
-    ${CMAKE_DD}
+    ${DD_TOOL}
     if=${CMAKE_CURRENT_BINARY_DIR}/${BOOT_TARGET}.bin
     of=${OS_IMAGE}
     bs=512 

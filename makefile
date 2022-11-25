@@ -4,7 +4,7 @@ BUILD_DIR := build
 CMAKE_CACHE := $(BUILD_DIR)/CMakeCache.txt
 
 all: config
-	@cd $(BUILD_DIR) && $(MAKE) && cd ..
+	@cd $(BUILD_DIR) && $(MAKE) VERBOSE:=${VERBOSE} && cd ..
 
 config: $(CMAKE_CACHE)
 

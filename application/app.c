@@ -58,6 +58,7 @@ int AppMain()
 {
     RegisterApp("A", TaskA, 255);
     RegisterApp("B", TaskB, 255);
+    return 0;
 }
 
 AppInfo *GetAppToRun(uint32 index)
