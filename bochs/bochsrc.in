@@ -6,8 +6,8 @@
 megs: 32
 
 # 设置BIOS和VGA BIOS
-romimage: file=@CMAKE_BOCHS@/BIOS-bochs-latest
-vgaromimage: file=@CMAKE_BOCHS@/VGABIOS-lgpl-latest
+romimage: file=@BOCHS_PATH@/BIOS-bochs-latest
+vgaromimage: file=@BOCHS_PATH@/VGABIOS-lgpl-latest
 
 # 定义启动盘a大小，文件路径，磁盘状态
 floppya: 1_44=@OS_IMAGE@, status=inserted
@@ -22,4 +22,4 @@ boot: floppy
 mouse: enabled=0
 
 # 并打开键盘,选择键盘布局
-keyboard: keymap=@CMAKE_BOCHS@/keymaps/x11-pc-us.map
+keyboard: keymap=@BOCHS_PATH@/keymaps/x11-pc-us.map
