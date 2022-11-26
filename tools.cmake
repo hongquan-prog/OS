@@ -1,3 +1,11 @@
+set(CMAKE_SYSTEM_NAME Generic)
+set(CMAKE_SYSTEM_PROCESSOR ADM64)
+
+set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
+set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
+set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
+set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY)
+
 # find nasm compiler
 find_program(CMAKE_ASM_NASM_COMPILER nasm) 
 if (NOT CMAKE_ASM_NASM_COMPILER) 
@@ -5,25 +13,14 @@ if (NOT CMAKE_ASM_NASM_COMPILER)
 endif() 
 
 # find c compiler
-if("${CMAKE_HOST_SYSTEM_NAME}" STREQUAL "Darwin")
-    find_program(CMAKE_C_COMPILER clang) 
-    if (NOT CMAKE_C_COMPILER) 
-        message(FATAL_ERROR "Cannot find apple clang compiler: clang") 
-    endif()
-    find_program(CMAKE_CXX_COMPILER clang++) 
-    if (NOT CMAKE_CXX_COMPILER) 
-        message(FATAL_ERROR "Cannot find apple clang++ compiler: clang++") 
-    endif()
-else()
-    find_program(CMAKE_C_COMPILER gcc) 
-    if (NOT CMAKE_C_COMPILER) 
-        message(FATAL_ERROR "Cannot find gnu c compiler: gcc") 
-    endif() 
-    find_program(CMAKE_CXX_COMPILER g++) 
-    if (NOT CMAKE_CXX_COMPILER) 
-        message(FATAL_ERROR "Cannot find gnu c++ compiler: g++") 
-    endif() 
-endif()
+find_program(CMAKE_C_COMPILER gcc) 
+if (NOT CMAKE_C_COMPILER) 
+    message(FATAL_ERROR "Cannot find gnu c compiler: gcc") 
+endif() 
+find_program(CMAKE_CXX_COMPILER g++) 
+if (NOT CMAKE_CXX_COMPILER) 
+    message(FATAL_ERROR "Cannot find gnu c++ compiler: g++") 
+endif() 
 
 # find linker
 find_program(CMAKE_LINKER ld) 
@@ -69,11 +66,8 @@ else()
 endif() 
 
 # find bochs
-if(${CMAKE_HOST_SYSTEM_NAME} STREQUAL "Darwin")
-    find_path(BOCHS_BIOS_PATH name BIOS-bochs-latest PATHS /opt/homebrew/share/bochs) 
-else()
-    find_path(BOCHS_BIOS_PATH name BIOS-bochs-latest PATHS /usr/share/bochs /usr/local/share/bochs)
-endif()
+find_path(BOCHS_BIOS_PATH name BIOS-bochs-latest PATHS /usr/share/bochs /usr/local/share/bochs)
+
 
 if(NOT BOCHS_BIOS_PATH)
     message(FATAL_ERROR "Cannot find bochs virtual marchine")
