@@ -24,7 +24,7 @@ add_custom_command(
     COMMAND
     ${CMAKE_ASM_NASM_COMPILER} ${CMAKE_CURRENT_SOURCE_DIR}/app-entry.asm
     -f elf 
-    -I ${CMAKE_SOURCE_DIR} -I ${COMMON_C_INCLUDE}
+    ${NASM_COMMON_INCLUDE}
     -o ${APP_ENTRY_OBJ}
     )
 

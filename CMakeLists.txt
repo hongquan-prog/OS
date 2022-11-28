@@ -18,6 +18,7 @@ set(APP_BIN ${CMAKE_BINARY_DIR}/app.bin)
 
 # common source and include directory
 set(COMMON_C_INCLUDE ${CMAKE_SOURCE_DIR}/common)
+set(NASM_COMMON_INCLUDE -I${CMAKE_SOURCE_DIR}/common/)
 aux_source_directory(${COMMON_C_INCLUDE} COMMON_C_SOURCE)
 
 # compile bootloader kernel application

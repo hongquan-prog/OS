@@ -4,7 +4,11 @@ BUILD_DIR := build
 CMAKE_CACHE := $(BUILD_DIR)/CMakeCache.txt
 
 all: config
-	@cd $(BUILD_DIR) && $(MAKE) VERBOSE:=${VERBOSE} && cd ..
+ifeq ($(VERBOSE), )
+	@cd $(BUILD_DIR) && $(MAKE) && cd ..
+else
+	@cd $(BUILD_DIR) && $(MAKE) VERBOSE:=$(VERBOSE) && cd ..
+endif
 
 config: $(CMAKE_CACHE)
 

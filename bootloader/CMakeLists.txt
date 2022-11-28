@@ -12,12 +12,12 @@ ENABLE_LANGUAGE(ASM_NASM)
 # compile boot.bin
 add_executable(${BOOT_TARGET} boot.asm)
 set_target_properties(${BOOT_TARGET} PROPERTIES SUFFIX .bin)
-target_compile_options(${BOOT_TARGET} PRIVATE -I${COMMON_C_INCLUDE})
+target_compile_options(${BOOT_TARGET} PRIVATE ${NASM_COMMON_INCLUDE})
 
 # compile loader.bin
 add_executable(${LOADER_TARGET} loader.asm)
 set_target_properties(${LOADER_TARGET} PROPERTIES SUFFIX .bin)
-target_compile_options(${LOADER_TARGET} PRIVATE -I${COMMON_C_INCLUDE})
+target_compile_options(${LOADER_TARGET} PRIVATE ${NASM_COMMON_INCLUDE})
 
 # generate boot.bin and loader.bin
 add_custom_command(
