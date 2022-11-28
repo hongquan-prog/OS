@@ -3,7 +3,7 @@ OUTPUT_ARCH("i386")
 ENTRY(_start)
 SECTIONS
 {
-    .text 0xF000:
+    .text @CONFIG_APP_LINK_ADDR@:
     {
         _text = .;
         *(.text)

@@ -68,9 +68,11 @@ endif()
 # find bochs
 find_path(BOCHS_BIOS_PATH name BIOS-bochs-latest PATHS /usr/share/bochs /usr/local/share/bochs)
 
-
 if(NOT BOCHS_BIOS_PATH)
     message(FATAL_ERROR "Cannot find bochs virtual marchine")
 endif() 
+
+# generate bochsrc
+configure_file(${CMAKE_SOURCE_DIR}/config/bochsrc.in ${CMAKE_SOURCE_DIR}/bochsrc)
 
 

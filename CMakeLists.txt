@@ -3,6 +3,8 @@ cmake_minimum_required(VERSION 3.16)
 include(tools.cmake)
 project(OS)
 
+include(config/config.cmake)
+
 set(BOOT_TARGET boot)
 set(MBR_TARGET mbr)
 set(LOADER_TARGET loader)
@@ -65,6 +67,3 @@ add_custom_target(copy ALL
     COMMAND
 	sudo umount ${MOUNT_DIR}
     )
-
-# generate bochsrc
-configure_file(${CMAKE_SOURCE_DIR}/bochs/bochsrc.in ${CMAKE_SOURCE_DIR}/bochsrc)
