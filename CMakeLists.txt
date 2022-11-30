@@ -12,7 +12,7 @@ set(LOADER_TARGET loader)
 set(KERNEL_TARGET kernel)
 set(APP_TARGET app)
 
-set(MOUNT_DIR  ${CMAKE_SOURCE_DIR}/mnt)
+set(MOUNT_DIR ${CMAKE_BINARY_DIR}/mnt)
 set(BOOT_BIN ${CMAKE_BINARY_DIR}/boot.bin)
 set(LOADER_BIN ${CMAKE_BINARY_DIR}/loader.bin)
 set(KERNEL_BIN ${CMAKE_BINARY_DIR}/kernel.bin)
