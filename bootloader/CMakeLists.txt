@@ -3,23 +3,24 @@ cmake_minimum_required(VERSION 3.16)
 project(bootloader)
 
 # enable nasm
-set(CMAKE_ASM_NASM_SOURCE_FILE_EXTENSIONS nasm asm S)
-set(CMAKE_ASM_NASM_OBJECT_FORMAT bin)
-set(CMAKE_ASM_NASM_FLAGS "-e")
-set(CMAKE_ASM_NASM_LINK_EXECUTABLE "nasm <OBJECTS> -o <TARGET> <LINK_LIBRARIES>")
+set_nasm_obj_format("bin")
 ENABLE_LANGUAGE(ASM_NASM)
 
 # compile boot.bin
 add_executable(${BOOT_TARGET} boot.asm)
 set_target_properties(${BOOT_TARGET} PROPERTIES SUFFIX .bin)
-target_compile_options(${BOOT_TARGET} PRIVATE ${NASM_COMMON_INCLUDE})
+# nasm include format eg: -I/usr/local/share/bochs/inc/
+# the target_include_directories function will remove the character '/'
+target_compile_options(${BOOT_TARGET} PRIVATE ${COMMON_ASM_INCLUDE_OPTION})
 
 # compile loader.bin
 add_executable(${LOADER_TARGET} loader.asm)
 set_target_properties(${LOADER_TARGET} PROPERTIES SUFFIX .bin)
-target_compile_options(${LOADER_TARGET} PRIVATE ${NASM_COMMON_INCLUDE})
+# nasm include format eg: -I/usr/local/share/bochs/inc/
+# the target_include_directories function will remove the character '/'
+target_compile_options(${LOADER_TARGET} PRIVATE ${COMMON_ASM_INCLUDE_OPTION})
 
-# generate boot.bin and loader.bin
+# move boot.bin and loader.bin to build directory
 add_custom_command(
     TARGET ${BOOT_TARGET}
     POST_BUILD 

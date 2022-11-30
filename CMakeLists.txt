@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.16)
 include(tools.cmake)
 project(OS)
 
+include(compile.cmake)
 include(config/config.cmake)
 
 set(BOOT_TARGET boot)
@@ -12,7 +13,6 @@ set(KERNEL_TARGET kernel)
 set(APP_TARGET app)
 
 set(MOUNT_DIR  ${CMAKE_SOURCE_DIR}/mnt)
-set(OS_IMAGE ${CMAKE_BINARY_DIR}/os.img)
 set(BOOT_BIN ${CMAKE_BINARY_DIR}/boot.bin)
 set(LOADER_BIN ${CMAKE_BINARY_DIR}/loader.bin)
 set(KERNEL_BIN ${CMAKE_BINARY_DIR}/kernel.bin)
@@ -20,7 +20,9 @@ set(APP_BIN ${CMAKE_BINARY_DIR}/app.bin)
 
 # common source and include directory
 set(COMMON_C_INCLUDE ${CMAKE_SOURCE_DIR}/common)
-set(NASM_COMMON_INCLUDE -I${CMAKE_SOURCE_DIR}/common/)
+# nasm include format eg: -I/usr/local/share/bochs/inc/
+# the target_include_directories function will remove the character '/'
+set(COMMON_ASM_INCLUDE_OPTION -I${CMAKE_SOURCE_DIR}/common/)
 aux_source_directory(${COMMON_C_INCLUDE} COMMON_C_SOURCE)
 
 # compile bootloader kernel application
